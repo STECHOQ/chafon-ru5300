@@ -9,7 +9,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const chafon = new _chafon(0x00, '192.168.85.244', 60000);
 
 chafon.on('data', received => {
-	console.dir(received, {depth:null});
+	//~ console.dir(received, {depth:null});
 });
 
 chafon.connect();
@@ -20,17 +20,37 @@ chafon.connect();
 	const system = await chafon.readSystemParam();
 	const device = await chafon.readDeviceParam();
 
-	console.log(system, device);
+	//~ console.log(system, device);
 
-	await sleep(1000);
+	console.log(await chafon.readTagData({
+		section: chafon.CONSTANTS.section.val.USER,
+		start: 0x02,
+		length: 0x08,
+		password: [0x00, 0x00,0x00, 0x00],
+	}));
+
+	//~ console.log(await chafon.writeTagData({
+		//~ section: chafon.CONSTANTS.section.val.USER,
+		//~ start: 0x02,
+		//~ data: [1,2,3,4,5,6,7,8],
+		//~ password: [0x00, 0x00,0x00, 0x00],
+	//~ }));
+
+	console.log(await chafon.readTagData({
+		section: chafon.CONSTANTS.section.val.USER,
+		start: 0x02,
+		length: 0x08,
+		password: [0x00, 0x00,0x00, 0x00],
+	}));
+
+	await sleep(5000);
 
 	await chafon.setActiveReading(true);
 
-	const setToRJ45 = await chafon.setDeviceOneParam(0x01, 0x02);
+	const setToRJ45 = await chafon.setDeviceOneParam(0x06, 0x00);
 	console.log(setToRJ45);
 
 	console.log(await chafon.readDeviceOneParam(0x01, 0x02));
-
 	//~ process.exit(0);
 })();
 
