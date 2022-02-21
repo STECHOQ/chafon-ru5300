@@ -2,25 +2,25 @@ global.__basedir = __dirname;
 const _chafon = require(`${__basedir}/lib/chafon_ru5300.lib.js`);
 const net = require('net');
 
-const data = [0xC3, 0x55, 0x00, 0x01, 0x00, 0x00, 0x1A, 0x01, 0x02, 0x31, 0x80, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x1E, 0x0A, 0x0F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
-
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const chafon = new _chafon({
 			addr: 0x00,
 			ip: '192.168.85.244',
 			port: 60000
 		});
-
-const {CONSTANTS} = chafon;
+const { CONSTANTS } = chafon;
 
 chafon.on('data', received => {
 	console.dir(received, {depth:null});
 });
 
+chafon.on('error', received => {
+	console.error(received);
+});
+
 chafon.connect();
 
 (async () => {
-	//~ console.log(CONSTANTS);
 	await chafon.setActiveReading(CONSTANTS.ACTIVE_READING_ON);
 
 	const setBeep = await chafon.setDeviceOneParam(
@@ -65,6 +65,6 @@ chafon.connect();
 
 	await chafon.setActiveReading(CONSTANTS.ACTIVE_READING_ON);
 
-	//~ console.log(await chafon.readDeviceOneParam(0x01, 0x02));
+	console.log(await chafon.readDeviceOneParam(CONSTANTS.ADDR.TRANSPORT));
 	//~ process.exit(0);
 })();
