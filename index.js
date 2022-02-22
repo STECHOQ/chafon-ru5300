@@ -6,7 +6,8 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const chafon = new _chafon({
 			addr: 0x00,
 			ip: '192.168.85.244',
-			port: 60000
+			port: 60000,
+			autostart: true,
 		});
 const { CONSTANTS } = chafon;
 
