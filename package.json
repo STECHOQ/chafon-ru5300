@@ -1,6 +1,6 @@
 {
   "name": "chafon-ru5300",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "wrapper to access UHF RFID Reader Chafon RU5300 ",
   "main": "lib/chafon_ru5300.lib.js",
   "directories": {
@@ -14,12 +14,16 @@
     "url": "git+https://github.com/STECHOQ/chafon-ru5300.git"
   },
   "keywords": [
-    "chafon"
+    "chafon",
+    "rfid"
   ],
-  "author": "iqrok",
+  "author": "iqrok <blogo3x@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/STECHOQ/chafon-ru5300/issues"
   },
-  "homepage": "https://github.com/STECHOQ/chafon-ru5300#readme"
+  "homepage": "https://github.com/STECHOQ/chafon-ru5300#readme",
+  "dependencies": {
+    "@iqrok/serial.helper": "^0.5.3"
+  }
 }
